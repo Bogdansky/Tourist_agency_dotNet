@@ -42,6 +42,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -80,17 +81,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\adobe.cs" />
-    <Compile Include="Model\client.cs" />
-    <Compile Include="Model\client_info.cs" />
-    <Compile Include="Model\Context.cs" />
-    <Compile Include="Model\country.cs" />
-    <Compile Include="Model\data.cs" />
-    <Compile Include="Model\manager.cs" />
-    <Compile Include="Model\order.cs" />
-    <Compile Include="Model\resort.cs" />
-    <Compile Include="Model\sysdiagrams.cs" />
-    <Compile Include="Model\tour.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

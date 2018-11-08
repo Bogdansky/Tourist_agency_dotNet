@@ -63,7 +63,8 @@ namespace Desktop_Tourism
 
         public async Task<bool> TryLogin()
         {
-            return await Task.Run(() => (UserAction.Login(Nickname.Text, Password.Password)));
+            string login = Nickname.Text, password = Password.Password;
+            return await Task.Run(() => (UserAction.Login(login, password)));
         }
 
         private void OnSignUp(object sender, RoutedEventArgs e)
