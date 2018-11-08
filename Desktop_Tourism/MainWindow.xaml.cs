@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -13,7 +14,8 @@ namespace Desktop_Tourism
     public partial class MainWindow : Window
     {
         int login = 0;
-        string[] imageSources = new string[2]{ "pack://application:,,,Pictures/change_1.png", "pack://application:,,,Pictures/change_2.png" };
+        string[] imageSources = new string[2]{ @"pack://application:,,,/pictures/change_1.png", @"pack://application:,,,/pictures/change_2.png" };
+        private const string errorTemplate = "Ошибка! Причина: ";
 
         public MainWindow()
         {
@@ -38,7 +40,7 @@ namespace Desktop_Tourism
         private void ChangeButtonImage()
         {
             login = GetIndex();
-            ButtonImage.Source = BitmapFrame.Create(new Uri(imageSources[login]));
+            ButtonImage.Source = new BitmapImage(new Uri(imageSources[login]));
         }
 
         private int GetIndex()
@@ -46,21 +48,50 @@ namespace Desktop_Tourism
             return login == 0 ? 1 : 0;
         }
 
-        private void OnLoginClick(object sender, RoutedEventArgs e)
+        private async void OnLoginClick(object sender, RoutedEventArgs e)
         {
-            UserAction.Login(Nickname.Text, Password.Password);
+            bool tryLogin = await TryLogin();
+            if (tryLogin)
+            {
+                MessageBox.Show("Молодец! Вход произошёл успешно");
+            }
+            else
+            {
+                MessageBox.Show("Возникла ошибка");
+            }
+        }
+
+        public async Task<bool> TryLogin()
+        {
+            return await Task.Run(() => (UserAction.Login(Nickname.Text, Password.Password)));
         }
 
         private void OnSignUp(object sender, RoutedEventArgs e)
         {
-            if (UserAction.SignUp(NewLogin.Text, NewPassword.Password))
+            if (GetMessage().Length == 0)
             {
                 MessageBox.Show("Молодец");
             }
             else
             {
-                ShowError("Логин уже используется");
+                ShowError(GetMessage());
             }
+        }
+
+        private string GetMessage()
+        {
+            string errorReason = $"{GetSignUpMessage()}. {EqualsPasswords()}";
+            return errorReason.Length == 1 ? "" : errorTemplate + errorReason;
+        }
+
+        private async Task<string> GetSignUpMessage()
+        {
+            return await UserAction.SignUp(NewLogin.Text, NewPassword.Password) ? "" : "Логин уже используется";
+        }
+
+        private string EqualsPasswords()
+        {
+            return NewPassword.Password.Equals(TryPassword.Password) ? "" : "Пароли не совпадают";
         }
 
         private void ShowError(string message)
