@@ -1,0 +1,51 @@
+﻿<Window x:Class="Desktop_Tourism.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Desktop_Tourism"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" Background="{x:Null}">
+    <Viewbox Stretch="Uniform">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="700"/>
+            </Grid.ColumnDefinitions>
+            <Grid Name="ToolBar" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <StackPanel Name="ChangeButtonPanel" Grid.Row="0">
+                    <Button Name="changeButton" Click="OnChangeButtonClick">
+                        <Image Name="ButtonImage" Source="Pictures/change_1.png"/>
+                    </Button>
+                </StackPanel>
+                <StackPanel Name="Status" Grid.Row="0">
+
+                </StackPanel>
+            </Grid>
+            <StackPanel Name="Registration" Grid.Column="1" Background="#A1B2E1A0" Height="400">
+                <StackPanel Name="RegistrationForm" Margin="150,100, 250,100" Background="{x:Null}">
+                    <Label Content="Логин" Margin="10,0,10,0"/>
+                    <TextBox Name="NewLogin" Margin="10,0,10,0"/>
+                    <Label Content="Пароль" Margin="10,0,10,0"/>
+                    <PasswordBox Name="NewPassword" Margin="10,0,10,0"/>
+                    <Label Content="Повторите пароль" Margin="10,0,10,0"/>
+                    <PasswordBox Name="TryPassword" Margin="10,0,10,0"/>
+                    <Button  Margin="90,30,90,0" Content="Зарегистрироваться" Click="OnSignUp"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Name="Login" Grid.Column="1" Background="Aquamarine" Visibility="Collapsed">
+                <StackPanel Name="LoginForm" Margin="150,100, 250,100" Background="MediumAquamarine">
+                    <Label Content="Логин" Margin="10,0,10,0"/>
+                    <TextBox Name="Nickname" Margin="10,0,10,0"/>
+                    <Label Content="Пароль" Margin="10,0,10,0"/>
+                    <PasswordBox Name="Password" Margin="10,0,10,0"/>
+                    <Button  Margin="105,74,105,0" Content="Войти" Click="OnLoginClick"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Viewbox>
+</Window>
